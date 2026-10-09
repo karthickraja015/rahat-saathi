@@ -55,8 +55,8 @@ const FIELDS = [
   {k: "hospital_type", t: "hosp"},
   {k: "police_informed", t: "tri"},
   {k: "police_informed_at", t: "dt", when: () => values.police_informed === "yes"},
-  {k: "hit_and_run", t: "tri"},
-  {k: "insured", t: "tri"},
+  {k: "hit_and_run", t: "tri", when: () => values.motor_vehicle !== "no"},
+  {k: "insured", t: "tri", when: () => values.motor_vehicle !== "no"},
   {k: "state", t: "state"}
 ];
 
@@ -263,7 +263,7 @@ function renderResult(d) {
   out.append(section(ui.why, el("ul", {}, d.reasons.map((r) => el("li", {class: "sev-" + r.severity, text: r.text})))));
   if (d.deadlines.length) {
     out.append(section(ui.deadlines, el("ul", {}, d.deadlines.map((x) =>
-      el("li", {}, el("div", {text: x.label}), el("div", {class: "muted", text: x.at_text}), countdown(x.at_iso))))));
+      el("li", {}, el("div", {text: x.label}), el("div", {class: "muted", text: x.at_text}), x.basis ? el("div", {class: "muted", text: x.basis}) : null, x.safe_text ? el("div", {class: "muted", text: x.safe_text}) : null, countdown(x.at_iso))))));
   }
   out.append(section(ui.next_steps, el("ol", {}, d.next_steps.map((s) => el("li", {text: s})))));
   out.append(section(ui.escalation, el("p", {text: d.escalation.text})));
