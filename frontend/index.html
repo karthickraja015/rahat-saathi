@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAHAT Saathi</title>
+<meta name="description" content="Unofficial helper for road accident victims in India: PM-RAHAT deadlines and next steps.">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<a id="emergency" class="emergency" href="tel:112">Emergency? Call 112 now.</a>
+<header>
+  <h1>RAHAT Saathi</h1>
+  <div id="langs" class="langs" role="group" aria-label="Language"></div>
+</header>
+<nav class="tabs">
+  <button id="tab-check" type="button" aria-selected="true">Check my case</button>
+  <button id="tab-prepared" type="button" aria-selected="false">Be prepared</button>
+</nav>
+<main>
+  <section id="view-check">
+    <p id="privacy" class="muted"></p>
+    <div id="freebox" class="card" hidden>
+      <label id="free-label" for="freetext"></label>
+      <textarea id="freetext" rows="3" maxlength="1000"></textarea>
+      <div class="actions">
+        <button id="btn-fill" type="button" class="primary"></button>
+        <button id="btn-mic" type="button"></button>
+      </div>
+      <p id="freemsg" class="muted" role="status"></p>
+    </div>
+    <h2 id="form-title"></h2>
+    <p id="tz-note" class="muted"></p>
+    <div id="form"></div>
+    <div class="actions">
+      <button id="btn-check" type="button" class="primary"></button>
+      <button id="btn-reset" type="button"></button>
+    </div>
+    <div id="result" aria-live="polite"></div>
+  </section>
+  <section id="view-prepared" hidden>
+    <div id="prepared"></div>
+  </section>
+</main>
+<footer id="footer"></footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
