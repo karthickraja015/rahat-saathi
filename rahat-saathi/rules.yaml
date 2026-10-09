@@ -1,0 +1,42 @@
+rules:
+  - id: cashless_cover_limit
+    text: "Cashless cover: up to Rs 1.5 lakh or 7 days of in-hospital care from the accident, whichever is earlier."
+    source_url: "https://pm-rahAt-official.example/scheme" # placeholder; verify
+    last_verified_date: "2026-10-01"
+    needs_verification: true
+
+  - id: first_hospitalisation_window
+    text: "Victims first hospitalised more than 24 hours after the accident are not eligible for the cashless scheme."
+    source_url: "https://pm-rahAt-official.example/scheme"
+    last_verified_date: "2026-10-01"
+    needs_verification: true
+
+  - id: stabilisation_duration
+    text: "Stabilisation treatment: up to 24 hours for non-life-threatening injuries, up to 48 hours for life-threatening injuries; subject to police authentication."
+    source_url: "https://pm-rahAt-official.example/scheme"
+    last_verified_date: "2026-10-01"
+    needs_verification: true
+
+  - id: police_confirmation_window
+    text: "Police confirmation needed within 24 hours for non-life-threatening cases, and within 48 hours for life-threatening cases."
+    source_url: "https://pm-rahAt-official.example/scheme"
+    last_verified_date: "2026-10-01"
+    needs_verification: true
+
+  - id: designated_hospitals
+    text: "Designated hospitals: those empanelled under AB PM-JAY (and others meeting scheme requirements). Non-designated hospitals can provide stabilisation only."
+    source_url: "https://pm-rahAt-official.example/scheme"
+    last_verified_date: "2026-10-01"
+    needs_verification: true
+
+  - id: escalation_to_collector
+    text: "Uninsured vehicle, hit-and-run, stabilisation at a non-designated hospital, or system timeout due to no police response: claim is escalated to the District Collector of the accident location."
+    source_url: "https://pm-rahAt-official.example/scheme"
+    last_verified_date: "2026-10-01"
+    needs_verification: true
+
+  - id: call_112
+    text: "Calling 112 connects to emergency services and provides the nearest designated hospital and ambulance."
+    source_url: "https://112.gov.in/" # placeholder
+    last_verified_date: "2026-10-01"
+    needs_verification: true
