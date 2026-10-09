@@ -1,0 +1,10 @@
+.venv/
+.idea/
+.codenow/
+.DS_Store
+__pycache__/
+old_ide/
+.env
+batch*.sh
+events.jsonl
+.pytest_cache/
