@@ -6,7 +6,7 @@ An unofficial helper for people dealing with a road accident in India. It explai
 
 Built for the Code for a Billion - Bharat Agentic-AI Hackathon 2026 (Transportation Safety).
 
-Live demo: ADD_LIVE_URL_HERE
+Live demo: https://rahat-saathi.onrender.com
 
 ## The problem
 
