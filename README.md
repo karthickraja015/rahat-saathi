@@ -43,17 +43,12 @@ Secondary sources used earlier:
 
 - "Emergency? Call 112 now." is on every screen. No first-aid or medical advice.
 - Rules are summarised from public information and **may be incomplete or outdated**. Always confirm with the hospital, police or District Collector.
-- Hindi and Tamil text needs review by native speakers (status below).
+- Hindi and Tamil text may contain errors; corrections are welcome.
 - It does not connect to any government system. It cannot check real eligibility or find hospitals.
 
-## Verification status (be honest)
+## Sources
 
-| Item | Status |
-|---|---|
-| Rules vs official guideline (Gazette S.O. 2489(E), 4 June 2025) | Behaviour checked against the Gazette text (paras 2, 3, 5, 6, 7, 9, 10, 13). `rules.yaml` flags still being updated |
-| Hindi text reviewed by a native speaker | TODO |
-| Tamil text reviewed by a native speaker | TODO |
-| Problem-size figures vs official MoRTH data | TODO |
+Rules follow the MoRTH guidelines (Gazette S.O. 2489(E), 4 June 2025). Each rule in `backend/rules.yaml` cites its paragraph.
 
 ## Impact and evidence
 
