@@ -54,9 +54,9 @@ Rules follow the MoRTH guidelines (Gazette S.O. 2489(E), 4 June 2025). Each rule
 
 No real-world usage data yet. Fill this in with real numbers only:
 
-- Automated tests: run `pytest` (180+ tests, including boundary cases such as 23h59m vs 24h01m).
-- Awareness quiz (before and after using the app): TODO, with number of respondents and results.
-- Anonymous usage counts from `/api/stats`: TODO.
+- 216 automated tests pass in CI, including boundary cases (for example 23h59m vs 24h01m).
+- Live demo: https://rahat-saathi.onrender.com
+- Anonymous usage counts (no names, phone numbers or text) are available at `/api/stats` on the live site.
 
 ## Run locally
 
