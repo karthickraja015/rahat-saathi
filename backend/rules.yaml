@@ -1,80 +1,90 @@
-# RAHAT Saathi rules. ALL rules need verification against the official guideline.
+# RAHAT Saathi rules, checked against the official guidelines:
+# MoRTH Gazette notification S.O. 2489(E), 4 June 2025
+# "Guidelines: Cashless Treatment of Road Accident Victims Scheme, 2025" (https://morth.gov.in/)
 # Edit only this file to change rule parameters. Unofficial helper; not legal advice.
-version: 1
+version: 2
 rules:
   - id: R01
     name: cover_limit
-    text: "Cashless cover is up to Rs 1.5 lakh or 7 days from the accident, whichever is earlier."
-    source_url: "https://www.nha.gov.in/"   # TODO: replace with exact guideline URL
-    last_verified_date: null
-    needs_verification: true
+    text: "Cashless cover is up to Rs 1.5 lakh per victim, for up to 7 days from the date of the accident, whichever ends first. The limit counts across all hospitals together."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): paras 6.7, 7.4, 7.11, 8.1"
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params:
       amount_inr: 150000
       days: 7
 
   - id: R02
     name: first_hospitalisation_window
-    text: "If first hospitalisation is more than 24 hours after the accident, the victim is not eligible."
-    source_url: "https://www.nha.gov.in/"
-    last_verified_date: null
-    needs_verification: true
+    text: "A victim whose first hospitalisation is more than 24 hours after the accident is not eligible."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): para 2.4"
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params:
       hours: 24
 
   - id: R03
     name: stabilisation_window
-    text: "Stabilisation is covered up to 24 hours (non-life-threatening) or 48 hours (life-threatening), subject to police authentication."
-    source_url: "https://www.nha.gov.in/"
-    last_verified_date: null
-    needs_verification: true
+    text: "Until the police respond, the hospital gives stabilisation treatment and is paid for it. This is the same window as police confirmation (24 hours; a further 24 hours if the hospital administrator marks the case life-threatening)."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): paras 6.6, 6.7, 6.8, 9.5. The app models the 48 hours as counted from hospital registration."
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params:
-      anchor: hospitalisation   # or: accident
+      anchor: hospitalisation   # the guideline counts from the hospital's TMS ID; admission time approximates it
       hours:
         non_life_threatening: 24
         life_threatening: 48
 
   - id: R04
     name: police_confirmation_window
-    text: "Police confirmation is needed within 24 hours (non-life-threatening) or 48 hours (life-threatening)."
-    source_url: "https://www.nha.gov.in/"
-    last_verified_date: null
-    needs_verification: true
+    text: "The police must confirm the accident on eDAR within 24 hours of the hospital's TMS request. If the hospital administrator marks the case life-threatening, a further 24 hours is allowed. If there is no response, the request times out and the victim is deemed discharged from the scheme, but stabilisation already given is still paid to the hospital."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): paras 6.5, 6.7, 6.8, 7.9, 9.5"
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params:
-      anchor: hospitalisation   # or: accident
+      anchor: hospitalisation
       hours:
         non_life_threatening: 24
         life_threatening: 48
 
   - id: R05
     name: designated_hospitals
-    text: "Designated hospitals are those empanelled under AB PM-JAY, plus others meeting scheme requirements. Non-designated hospitals provide stabilisation only."
-    source_url: "https://www.nha.gov.in/"
-    last_verified_date: null
-    needs_verification: true
+    text: "Designated hospitals include hospitals empanelled under AB PM-JAY that follow NHA guidelines, plus others designated by the state. A non-designated hospital can only give stabilisation treatment and must arrange an ambulance to the nearest designated hospital. If it gives full treatment itself, the cost is recovered from the victim."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): paras 3.1, 3.2, 3.3, 5.1, 7.10; SOP for non-designated hospitals"
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params: {}
 
   - id: R06
     name: district_collector_route
-    text: "For an uninsured vehicle, hit-and-run, stabilisation at a non-designated hospital, or a police-response timeout, the claim goes to the District Collector of the accident location."
-    source_url: "https://www.nha.gov.in/"
-    last_verified_date: null
-    needs_verification: true
+    text: "For an uninsured vehicle, a hit-and-run, stabilisation at a non-designated hospital, or a police-response timeout, the hospital's claim is paid from the government's uninsured / hit-and-run account with the District Collector's approval. The victim's cover does not change and the victim does not apply to the Collector."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): paras 10.3, 10.4; SOP: District Collector, claim settlement"
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params:
       triggers: [uninsured_vehicle, hit_and_run, non_designated_stabilisation, police_timeout]
 
   - id: R07
     name: emergency_112
-    text: "Dialling 112 gives the nearest designated hospital and an ambulance."
-    source_url: "https://112.gov.in/"
-    last_verified_date: null
-    needs_verification: true
+    text: "Dialling 112 gives the caller details of the nearest designated hospital, passes the ambulance request to 108 or the state ambulance helpline, and forwards the accident details to the local police station."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): para 5.3; SOP: 112 operator"
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params:
       number: "112"
 
   - id: R08
     name: motor_vehicle_required
-    text: "The scheme applies to road accidents involving a motor vehicle. (Added by the app author; verify.)"
-    source_url: "https://morth.nic.in/"
-    last_verified_date: null
-    needs_verification: true
+    text: "The scheme covers victims of a road accident caused by the use of a motor vehicle, on any road, who need hospitalisation."
+    source_url: "https://morth.gov.in/"
+    source_ref: "Gazette S.O. 2489(E): para 2.1"
+    last_verified_date: "2026-10-16"
+    needs_verification: false
     params: {}

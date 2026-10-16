@@ -30,17 +30,15 @@ def test_no_vehicle_hides_collector_content(lang):
     assert d["status"]["code"] == "likely_not_eligible"
     assert not ({r["code"] for r in d["reasons"]} & COLLECTOR)
     assert d["escalation"]["route"] == "hospital_and_police"
-    assert "collector" not in [g["group"] for g in d["checklist"]]
-    collector_step = render_result(*case(motor_vehicle="yes", hit_and_run="yes")[2:0:-1] and (case(motor_vehicle="yes", hit_and_run="yes")[2], case(motor_vehicle="yes", hit_and_run="yes")[1], lang, now))["next_steps"]
-    assert len(collector_step) > len(d["next_steps"]) - 1
 
 
-def test_vehicle_yes_hit_and_run_still_routes_to_collector():
+def test_vehicle_yes_hit_and_run_keeps_route_code_without_collector_application():
     now, facts, res = case(hit_and_run="yes")
     d = render_result(res, facts, "en", now)
     assert d["escalation"]["route"] == "district_collector"
-    assert "collector" in [g["group"] for g in d["checklist"]]
     assert {r["code"] for r in d["reasons"]} & COLLECTOR
+    assert "collector" not in [g["group"] for g in d["checklist"]]
+    assert "need to apply" in d["escalation"]["text"]
 
 
 def test_admitted_in_time_hides_first_admission_deadline():
@@ -55,25 +53,22 @@ def test_late_admission_keeps_first_admission_deadline():
     assert "hospitalisation_deadline" in [x["key"] for x in render_result(res, facts, "en", now)["deadlines"]]
 
 
-def test_police_deadline_states_its_basis_and_safe_target():
+def test_police_deadline_has_basis_and_no_invented_safe_date():
     now, facts, res = case()
     d = render_result(res, facts, "en", now)
+    keys = [x["key"] for x in d["deadlines"]]
+    assert "police_deadline" in keys and "stabilisation_end" not in keys
     item = next(x for x in d["deadlines"] if x["key"] == "police_deadline")
-    assert item.get("basis")
-    anchor = res.windows.anchors.get("police")
-    if anchor == "hospitalisation":
-        assert item.get("safe_text")
-    else:
-        assert "safe_text" not in item
+    assert item.get("basis") and "safe_text" not in item
     assert "Counted from" in d["summary_text"]
 
 
-def test_police_wording_updated_in_all_languages():
+def test_police_wording_follows_guideline():
     from backend import translator as T
-    assert "recorded" in T.STRINGS["en"]["question"]["police_informed"]
-    assert "confirm" in T.STRINGS["en"]["reason"]["police_in_time"]
+    assert "eDAR" in T.STRINGS["en"]["question"]["police_informed"]
+    assert "confirmed" in T.STRINGS["en"]["reason"]["police_in_time"]
 
 
 def test_frontend_hides_dependent_fields_and_shows_basis():
     assert JS.count('values.motor_vehicle !== "no"') == 2
-    assert "x.basis" in JS and "x.safe_text" in JS
+    assert "x.basis" in JS

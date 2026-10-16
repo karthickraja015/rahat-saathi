@@ -17,7 +17,11 @@ def test_ids_unique():
 
 @pytest.mark.parametrize("rid", IDS)
 def test_rule_needs_verification(rid):
-    assert load_rules()[rid]["needs_verification"] is True
+    rule = load_rules()[rid]
+    assert isinstance(rule["needs_verification"], bool)
+    if rule["needs_verification"] is False:
+        assert rule.get("last_verified_date")
+        assert "Gazette" in rule.get("source_ref", "")
 
 
 @pytest.mark.parametrize("rid", IDS)

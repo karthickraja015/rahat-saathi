@@ -1,4 +1,5 @@
-"""Turns an EligibilityResult into localized, display-ready output and a shareable text summary."""
+"""Turns an EligibilityResult into localized, display-ready output and a shareable text summary.
+Wording follows MoRTH Guidelines, Gazette S.O. 2489(E), 4 June 2025."""
 from __future__ import annotations
 
 from datetime import datetime
@@ -9,10 +10,11 @@ from backend.checklist import build_checklist
 from backend.models import Facts, now_ist
 from backend.rules_engine import evaluate_eligibility
 
-# Reasons that only make sense when a motor vehicle was involved.
 _COLLECTOR_REASONS = {"hit_and_run_collector", "hit_and_run_unknown", "uninsured_collector",
                       "insured_unsure", "insurance_unknown", "insured_unknown"}
 _ANCHOR_KEY = {"police_deadline": "police", "stabilisation_end": "stabilisation"}
+_DROP_STEPS = {"approach_district_collector"}   # victims do not apply to the Collector
+_HIDE_DEADLINES = {"stabilisation_end"}         # same window as police confirmation
 
 
 def _params(params: Optional[dict]) -> dict:
@@ -40,10 +42,10 @@ def _text(d: dict, ui: dict, now) -> str:
             L.append(f"- {x['label']}: {x['at_text']}")
             if x.get("basis"):
                 L.append(f"    {x['basis']}")
-            if x.get("safe_text"):
-                L.append(f"    {x['safe_text']}")
     L += ["", f'{ui["next_steps"]}:'] + [f"{i}. {s}" for i, s in enumerate(d["next_steps"], 1)]
-    L += ["", f'{ui["escalation"]}: {d["escalation"]["text"]}', "", f'{ui["documents"]}:', f'({ui["checklist_note"]})']
+    L += ["", f'{ui["escalation"]}: {d["escalation"]["text"]}']
+    L += ["", f'{ui["help_title"]}:'] + [f"- {h}" for h in d["help"]]
+    L += ["", f'{ui["documents"]}:', f'({ui["checklist_note"]})']
     for g in d["checklist"]:
         L.append(g["title"] + ":")
         L += [f"  - {i}" for i in g["items"]]
@@ -63,7 +65,7 @@ def render_result(result, facts, lang: str = "en", now=None) -> dict:
         for r in result.reasons
         if not (no_vehicle and r.code in _COLLECTOR_REASONS)
     ]
-    steps = [s for s in result.next_steps if not (no_vehicle and s == "approach_district_collector")]
+    steps = [s for s in result.next_steps if s not in _DROP_STEPS]
     route = "hospital_and_police" if no_vehicle else result.escalation.route
 
     deadlines = []
@@ -71,8 +73,10 @@ def render_result(result, facts, lang: str = "en", now=None) -> dict:
         anchors = getattr(result.windows, "anchors", {}) or {}
         h = facts.hospitalised_at
         for name, dt in sorted(result.windows.deadlines.items(), key=lambda kv: kv[1]):
+            if name in _HIDE_DEADLINES:
+                continue
             if name == "hospitalisation_deadline" and h is not None and h <= dt:
-                continue  # already admitted in time; deadline is just noise
+                continue
             label = T.STRINGS[lang]["deadline"].get(name) or name.replace("_", " ")
             item = {"key": name, "label": label, "at_iso": dt.isoformat(),
                     "at_text": T.fmt_dt(dt), "seconds_left": int((dt - now).total_seconds())}
@@ -81,20 +85,14 @@ def render_result(result, facts, lang: str = "en", now=None) -> dict:
                 item["basis"] = ui["from_hosp"]
             elif anchor == "accident":
                 item["basis"] = ui["from_acc"]
-            if name == "police_deadline" and anchor == "hospitalisation" and facts.accident_at and h is not None:
-                safe = facts.accident_at + (dt - h)
-                if safe < dt:
-                    item["safe_text"] = T.t(lang, "ui", "safe_by", when=T.fmt_dt(safe))
             deadlines.append(item)
 
-    groups = build_checklist(facts, result)
-    if no_vehicle:
-        groups = [g for g in groups if g["group"] != "collector"]
     checklist = [
         {"group": g["group"], "title": T.t(lang, "group", g["group"]),
          "items": [T.t(lang, "item", i) for i in g["items"]]}
-        for g in groups
+        for g in build_checklist(facts, result)
     ]
+    help_items = [ui["help_refuse"], ui["help_other"], ui["help_escalate"]]
     nq = result.next_question
     d = {
         "lang": lang,
@@ -104,6 +102,7 @@ def render_result(result, facts, lang: str = "en", now=None) -> dict:
         "deadlines": deadlines,
         "next_steps": [T.t(lang, "step", s) for s in steps],
         "escalation": {"route": route, "text": T.t(lang, "route", route)},
+        "help": help_items,
         "checklist": checklist,
         "next_question": {"key": nq, "text": T.t(lang, "question", nq)} if nq else None,
     }

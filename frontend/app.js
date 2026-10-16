@@ -27,24 +27,24 @@ const L = {
 };
 
 const PREP = {
-  en: ["Call 112. It can send an ambulance and tell you the nearest designated hospital.",
-       "Ask the hospital to treat the victim under the PM-RAHAT cashless scheme: up to ₹1.5 lakh, up to 7 days.",
-       "The victim should be admitted to a hospital within 24 hours of the accident.",
-       "Make sure the police record the accident. Police confirmation is needed within 24 hours (non-life-threatening) or 48 hours (life-threatening).",
-       "If it is a hit-and-run, or the vehicle is uninsured, the claim may go to the District Collector.",
-       "Keep copies of the police report, hospital papers and bills."],
-  hi: ["112 पर कॉल करें। वहाँ से एम्बुलेंस भेजी जा सकती है और निकटतम निर्धारित अस्पताल की जानकारी मिल सकती है।",
-       "अस्पताल से कहें कि पीड़ित का इलाज PM-RAHAT कैशलेस योजना के तहत करे: ₹1.5 लाख तक, अधिकतम 7 दिन।",
+  en: ["Call 112. They share details of the nearest designated hospital, pass your ambulance request to 108, and inform the local police station.",
+       "Ask the hospital to treat the victim under the PM-RAHAT cashless scheme: up to ₹1.5 lakh or 7 days from the accident, whichever ends first.",
+       "The victim should be admitted to hospital within 24 hours of the accident.",
+       "The police must confirm the accident on the eDAR system within 24 hours of the hospital registering the patient (48 hours if the hospital marks the case life-threatening). Ask the hospital to check.",
+       "A hit-and-run or an uninsured vehicle does not stop the cover. The hospital's payment then comes from a different government fund. If a designated hospital will not admit the victim, report it to the District Grievance Redressal Officer, and call 14555 for other problems.",
+       "Keep copies of the police report or eDAR/accident number, hospital papers and bills."],
+  hi: ["112 पर कॉल करें। वे निकटतम निर्धारित अस्पताल की जानकारी देते हैं, एम्बुलेंस का अनुरोध 108 को भेजते हैं और स्थानीय पुलिस स्टेशन को सूचित करते हैं।",
+       "अस्पताल से कहें कि पीड़ित का इलाज PM-RAHAT कैशलेस योजना के तहत करे: ₹1.5 लाख तक या दुर्घटना से 7 दिन तक, जो पहले समाप्त हो।",
        "पीड़ित को दुर्घटना के 24 घंटे के भीतर अस्पताल में भर्ती होना चाहिए।",
-       "सुनिश्चित करें कि पुलिस दुर्घटना दर्ज करे। पुलिस की पुष्टि 24 घंटे (जानलेवा न हो तो) या 48 घंटे (जानलेवा हो तो) के भीतर ज़रूरी है।",
-       "हिट-एंड-रन या बिना बीमा वाहन के मामले में दावा जिला कलेक्टर के पास जा सकता है।",
-       "पुलिस रिपोर्ट, अस्पताल के कागज़ात और बिलों की प्रतियाँ रखें।"],
-  ta: ["112-ஐ அழைக்கவும். ஆம்புலன்ஸ் அனுப்பவும், அருகிலுள்ள நியமிக்கப்பட்ட மருத்துவமனையைத் தெரிவிக்கவும் அவர்களால் முடியும்.",
-       "PM-RAHAT பணமில்லா திட்டத்தின் கீழ் பாதிக்கப்பட்டவருக்கு சிகிச்சை அளிக்குமாறு மருத்துவமனையிடம் கேளுங்கள்: ₹1.5 லட்சம் வரை, அதிகபட்சம் 7 நாட்கள்.",
+       "अस्पताल द्वारा मरीज़ को दर्ज करने के 24 घंटे के भीतर पुलिस को eDAR सिस्टम पर दुर्घटना की पुष्टि करनी होती है (यदि अस्पताल मामले को जानलेवा चिह्नित करे तो 48 घंटे)। अस्पताल से जाँचने को कहें।",
+       "हिट-एंड-रन या बिना बीमा वाहन होने से कवर नहीं रुकता। तब अस्पताल का भुगतान एक अलग सरकारी कोष से होता है। यदि निर्धारित अस्पताल पीड़ित को भर्ती न करे, तो जिला शिकायत निवारण अधिकारी को बताएँ; अन्य समस्याओं के लिए 14555 पर कॉल करें।",
+       "पुलिस रिपोर्ट या eDAR/दुर्घटना संख्या, अस्पताल के कागज़ात और बिलों की प्रतियाँ रखें।"],
+  ta: ["112-ஐ அழைக்கவும். அவர்கள் அருகிலுள்ள நியமிக்கப்பட்ட மருத்துவமனையின் விவரங்களைத் தருவார்கள், ஆம்புலன்ஸ் கோரிக்கையை 108-க்கு அனுப்புவார்கள், உள்ளூர் காவல் நிலையத்துக்கும் தெரிவிப்பார்கள்.",
+       "PM-RAHAT பணமில்லா திட்டத்தின் கீழ் சிகிச்சை அளிக்குமாறு மருத்துவமனையிடம் கேளுங்கள்: ₹1.5 லட்சம் வரை அல்லது விபத்திலிருந்து 7 நாட்கள் வரை, எது முதலில் முடிகிறதோ அது.",
        "விபத்து நடந்த 24 மணி நேரத்துக்குள் பாதிக்கப்பட்டவர் மருத்துவமனையில் அனுமதிக்கப்பட வேண்டும்.",
-       "காவல்துறை விபத்தைப் பதிவு செய்வதை உறுதிசெய்யுங்கள். காவல்துறை உறுதிப்படுத்தல் 24 மணி நேரத்துக்குள் (உயிருக்கு ஆபத்து இல்லையெனில்) அல்லது 48 மணி நேரத்துக்குள் (ஆபத்து இருந்தால்) தேவை.",
-       "ஹிட்-அண்ட்-ரன் அல்லது காப்பீடு இல்லாத வாகனம் என்றால் கோரிக்கை மாவட்ட ஆட்சியருக்குச் செல்லலாம்.",
-       "காவல்துறை அறிக்கை, மருத்துவமனை ஆவணங்கள் மற்றும் பில்களின் நகல்களை வைத்திருங்கள்."]
+       "மருத்துவமனை நோயாளியைப் பதிவு செய்த 24 மணி நேரத்துக்குள் காவல்துறை eDAR அமைப்பில் விபத்தை உறுதிப்படுத்த வேண்டும் (மருத்துவமனை வழக்கை உயிருக்கு ஆபத்தானது என்று குறித்தால் 48 மணி நேரம்). சரிபார்க்க மருத்துவமனையிடம் கேளுங்கள்.",
+       "ஹிட்-அண்ட்-ரன் அல்லது காப்பீடு இல்லாத வாகனம் என்றாலும் காப்பீடு நிற்காது. அப்போது மருத்துவமனைக்கான கட்டணம் வேறு அரசு நிதியிலிருந்து வழங்கப்படும். நியமிக்கப்பட்ட மருத்துவமனை அனுமதிக்க மறுத்தால் மாவட்ட குறைதீர்ப்பு அதிகாரியிடம் தெரிவிக்கவும்; பிற பிரச்சினைகளுக்கு 14555-ஐ அழைக்கவும்.",
+       "காவல்துறை அறிக்கை அல்லது eDAR/விபத்து எண், மருத்துவமனை ஆவணங்கள் மற்றும் பில்களின் நகல்களை வைத்திருங்கள்."]
 };
 
 const FIELDS = [
@@ -267,6 +267,7 @@ function renderResult(d) {
   }
   out.append(section(ui.next_steps, el("ol", {}, d.next_steps.map((s) => el("li", {text: s})))));
   out.append(section(ui.escalation, el("p", {text: d.escalation.text})));
+  if (d.help && d.help.length) out.append(section(ui.help_title, el("ul", {}, d.help.map((h) => el("li", {text: h})))));
   out.append(section(ui.documents, el("p", {class: "muted", text: ui.checklist_note}),
     d.checklist.map((g) => el("details", {}, el("summary", {text: g.title}), el("ul", {}, g.items.map((i) => el("li", {text: i})))))));
   out.append(section(ui.summary_title, el("pre", {class: "summary", text: d.summary_text}), shareButtons(d.summary_text)));

@@ -58,11 +58,12 @@ def test_late_hospitalisation_is_not_eligible():
     assert "24" in render_result(res, facts, "en", now)["summary_text"]
 
 
-def test_hit_and_run_adds_collector_checklist_and_route():
+def test_hit_and_run_keeps_route_but_has_no_collector_application():
     now, facts, res = _case(hit_and_run="yes")
     d = render_result(res, facts, "en", now)
     assert d["escalation"]["route"] == "district_collector"
-    assert "collector" in [g["group"] for g in d["checklist"]]
+    assert "collector" not in [g["group"] for g in d["checklist"]]
+    assert "written application" not in d["summary_text"].lower()
 
 
 def test_clean_case_has_no_collector_checklist():

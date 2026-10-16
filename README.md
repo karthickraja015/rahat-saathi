@@ -14,7 +14,9 @@ Live demo: ADD_LIVE_URL_HERE
 - PM-RAHAT launched on 13 February 2026. It offers cashless treatment up to Rs 1.5 lakh for up to 7 days, but eligibility depends on time limits and police confirmation that families under stress rarely know.
 - Hit-and-run, uninsured vehicles and non-designated hospitals follow different routes (the District Collector).
 
-Sources used (public, secondary; verify against the official scheme guideline):
+Primary source: MoRTH Gazette notification S.O. 2489(E), 4 June 2025 (Cashless Treatment of Road Accident Victims Scheme, 2025 guidelines), also on https://morth.gov.in/
+
+Secondary sources used earlier:
 
 - https://en.vikaspedia.in/viewcontent/schemesall/central-government-schemes/pm-rahat
 - https://westkhasihills.gov.in/scheme/prime-minister-road-accident-victims-hospitalisation-assured-treatment-pm-rahat/
@@ -48,7 +50,7 @@ Sources used (public, secondary; verify against the official scheme guideline):
 
 | Item | Status |
 |---|---|
-| Rules vs official PM-RAHAT guideline | TODO. All rules still `needs_verification: true` |
+| Rules vs official guideline (Gazette S.O. 2489(E), 4 June 2025) | Behaviour checked against the Gazette text (paras 2, 3, 5, 6, 7, 9, 10, 13). `rules.yaml` flags still being updated |
 | Hindi text reviewed by a native speaker | TODO |
 | Tamil text reviewed by a native speaker | TODO |
 | Problem-size figures vs official MoRTH data | TODO |
